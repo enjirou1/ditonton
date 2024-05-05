@@ -1,78 +1,79 @@
+import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/movies/home_movie_page.dart';
+import 'package:ditonton/presentation/pages/movies/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/home_tv_series_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/watchlist_series_page.dart';
 import 'package:flutter/material.dart';
 
-class CustomDrawer extends StatefulWidget {
-  final Widget content;
- 
-  const CustomDrawer({
-    super.key, 
-    required this.content,
-  });
+class CustomDrawer extends StatelessWidget {
+  final String routeName;
 
-  @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
-}
-
-class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this, 
-      duration: const Duration(milliseconds: 250)
-    );
-  }
-
-  Widget _buildDrawer() {
-    return const Column(
-      children: [
-        UserAccountsDrawerHeader(
-          currentAccountPicture: CircleAvatar(
-            backgroundImage: NetworkImage('https://raw.githubusercontent.com/dicodingacademy/assets/main/flutter_expert_academy/dicoding-icon.png'),
-          ),
-          accountName: Text('Ditonton'),
-          accountEmail: Text('ditonton@dicoding.com'),
-        ),
-        ListTile(
-          leading: Icon(Icons.movie),
-          title: Text('Movies'),
-        ),
-        ListTile(
-          leading: Icon(Icons.save_alt),
-          title: Text('Watchlist'),
-        ),
-      ],
-    );
-  }
-
-  void toggle() => _animationController.isDismissed
-    ? _animationController.forward()
-    : _animationController.reverse();
+  const CustomDrawer({super.key, required this.routeName});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: toggle,
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          double slide = 255.0 * _animationController.value;
-          double scale = 1 - (_animationController.value * 0.3);
-      
-          return Stack(
-            children: [
-              _buildDrawer(),
-              Transform(
-                transform: Matrix4.identity()
-                  ..translate(slide)
-                  ..scale(scale),
-                alignment: Alignment.centerLeft,
-                child: widget.content,
-              ),
-            ],
-          );
-        }
+    return Drawer(
+      child: Column(
+        children: [
+          const UserAccountsDrawerHeader(
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage('assets/avatar.jpg'),
+            ),
+            accountName: Text('Andy'),
+            accountEmail: Text('andy.halim2704.com'),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 215, 110, 241)
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.movie),
+            title: const Text('Movies'),
+            onTap: () {
+              if (routeName == HomeMoviePage.ROUTE_NAME) {
+                Navigator.pop(context);
+              } else {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME);
+              }
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.save_alt),
+            title: const Text('Movies Watchlist'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.tv),
+            title: const Text('Tv Series'),
+            onTap: () {
+              if (routeName == HomeTvSeriesPage.ROUTE_NAME) {
+                Navigator.pop(context);
+              } else {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, HomeTvSeriesPage.ROUTE_NAME);
+              }
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.save_alt),
+            title: const Text('Tv Series Watchlist'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, WatchlistTvSeriesPage.ROUTE_NAME);
+            },
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+            },
+            leading: const Icon(Icons.info_outline),
+            title: const Text('About'),
+          ),
+        ],
       ),
     );
   }
