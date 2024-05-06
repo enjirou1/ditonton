@@ -25,7 +25,7 @@ final testTvSeriesList = [testTvSeries];
 
 final testTvSeriesDetail = TvSeriesDetail(
   firstAirDate: 'firstAirDate',
-  name: 'name',
+  name: 'title',
   originCountry: const ["1", "2", "3"],
   originalLanguage: 'originalLanguage',
   originalName: 'originalName',

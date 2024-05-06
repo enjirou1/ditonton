@@ -219,7 +219,7 @@ void main() {
     const tId = 1;
     const tTvSeriesResponse = TvSeriesDetailResponse(
       firstAirDate: 'firstAirDate',
-      name: 'name',
+      name: 'title',
       originCountry: ["1", "2", "3"],
       originalLanguage: 'originalLanguage',
       originalName: 'originalName',
