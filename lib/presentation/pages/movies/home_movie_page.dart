@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
+import 'package:ditonton/presentation/pages/movies/now_playing_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/search_page.dart';
 import 'package:ditonton/presentation/pages/movies/top_rated_movies_page.dart';
@@ -56,9 +57,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Now Playing',
-                    style: kHeading6,
+                  _buildSubHeading(
+                    title: 'Now Playing',
+                    onTap: () => Navigator.pushNamed(context, NowPlayingMoviesPage.ROUTE_NAME),
                   ),
                   Consumer<MovieListNotifier>(builder: (context, data, child) {
                     final state = data.nowPlayingState;

@@ -6,11 +6,11 @@ import 'package:ditonton/domain/usecases/tv_series/get_top_rated_tv_series.dart'
 import 'package:flutter/material.dart';
 
 class TvSeriesListNotifier extends ChangeNotifier {
-  var _nowPlayingTvSeries = <TvSeries>[];
-  List<TvSeries> get nowPlayingTvSeries => _nowPlayingTvSeries;
+  var _airingTodayTvSeries = <TvSeries>[];
+  List<TvSeries> get airingTodayTvSeries => _airingTodayTvSeries;
 
-  RequestState _nowPlayingState = RequestState.Empty;
-  RequestState get nowPlayingState => _nowPlayingState;
+  RequestState _airingTodayState = RequestState.Empty;
+  RequestState get airingTodayState => _airingTodayState;
 
   var _popularTvSeries = <TvSeries>[];
   List<TvSeries> get popularTvSeries => _popularTvSeries;
@@ -28,30 +28,30 @@ class TvSeriesListNotifier extends ChangeNotifier {
   String get message => _message;
 
   TvSeriesListNotifier({
-    required this.getNowPlayingTvSeries,
+    required this.getAiringTodayTvSeries,
     required this.getPopularTvSeries,
     required this.getTopRatedTvSeries,
   });
 
-  final GetNowPlayingTvSeries getNowPlayingTvSeries;
+  final GetAiringTodayTvSeries getAiringTodayTvSeries;
   final GetPopularTvSeries getPopularTvSeries;
   final GetTopRatedTvSeries getTopRatedTvSeries;
 
-  Future<void> fetchNowPlayingTvSeries() async {
-    _nowPlayingState = RequestState.Loading;
+  Future<void> fetchAiringTodayTvSeries() async {
+    _airingTodayState = RequestState.Loading;
     notifyListeners();
 
-    final result = await getNowPlayingTvSeries.execute();
+    final result = await getAiringTodayTvSeries.execute();
     
     result.fold(
       (failure) {
-        _nowPlayingState = RequestState.Error;
+        _airingTodayState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
       (tvSeriesListData) {
-        _nowPlayingState = RequestState.Loaded;
-        _nowPlayingTvSeries = tvSeriesListData;
+        _airingTodayState = RequestState.Loaded;
+        _airingTodayTvSeries = tvSeriesListData;
         notifyListeners();
       },
     );

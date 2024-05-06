@@ -32,9 +32,11 @@ import 'package:ditonton/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:ditonton/presentation/provider/movies/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movies/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movies/movie_search_notifier.dart';
+import 'package:ditonton/presentation/provider/movies/now_playing_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/movies/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/movies/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/movies/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_series/airing_today_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/tv_series_detail_notifier.dart';
@@ -85,10 +87,15 @@ void init() {
       getWatchlistMovies: locator(),
     ),
   );
+  locator.registerFactory(
+    () => NowPlayingMoviesNotifier(
+      getNowPlayingMovies: locator(),
+    ),
+  );
   // tv series
   locator.registerFactory(
     () => TvSeriesListNotifier(
-      getNowPlayingTvSeries: locator(),
+      getAiringTodayTvSeries: locator(),
       getPopularTvSeries: locator(),
       getTopRatedTvSeries: locator(),
     ),
@@ -122,6 +129,11 @@ void init() {
       getWatchlistTvSeries: locator(),
     ),
   );
+  locator.registerFactory(
+    () => AiringTodayTvSeriesNotifier(
+      getAiringTodayTvSeries: locator(),
+    ),
+  );
 
   // use case
   // movies
@@ -136,7 +148,7 @@ void init() {
   locator.registerLazySingleton(() => RemoveWatchlist(locator()));
   locator.registerLazySingleton(() => GetWatchlistMovies(locator()));
   // tv series
-  locator.registerLazySingleton(() => GetNowPlayingTvSeries(locator()));
+  locator.registerLazySingleton(() => GetAiringTodayTvSeries(locator()));
   locator.registerLazySingleton(() => GetPopularTvSeries(locator()));
   locator.registerLazySingleton(() => GetTopRatedTvSeries(locator()));
   locator.registerLazySingleton(() => GetTvSeriesDetail(locator()));
