@@ -1,5 +1,5 @@
-import '../../../../lib/data/models/movies/movie_model.dart';
-import '../../../../lib/domain/entities/movie.dart';
+import 'package:core/data/models/movies/movie_model.dart';
+import 'package:core/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

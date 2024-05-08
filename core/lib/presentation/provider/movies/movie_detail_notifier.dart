@@ -1,11 +1,11 @@
-import '../../../domain/entities/movie.dart';
-import '../../../domain/entities/movie_detail.dart';
-import '../../../domain/usecases/movies/get_movie_detail.dart';
-import '../../../domain/usecases/movies/get_movie_recommendations.dart';
-import '../../../utils/state_enum.dart';
-import '../../../domain/usecases/movies/get_watchlist_status.dart';
-import '../../../domain/usecases/movies/remove_watchlist.dart';
-import '../../../domain/usecases/movies/save_watchlist.dart';
+import 'package:core/domain/entities/movie.dart';
+import 'package:core/domain/entities/movie_detail.dart';
+import 'package:core/domain/usecases/movies/get_movie_detail.dart';
+import 'package:core/domain/usecases/movies/get_movie_recommendations.dart';
+import 'package:core/utils/state_enum.dart';
+import 'package:core/domain/usecases/movies/get_watchlist_status.dart';
+import 'package:core/domain/usecases/movies/remove_watchlist.dart';
+import 'package:core/domain/usecases/movies/save_watchlist.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
 import 'package:core/utils/state_enum.dart';
 import 'package:core/domain/entities/tv_series.dart';
-import 'package:core/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:flutter/foundation.dart';
+import 'package:search/domain/usecases/tv_series/search_tv_series.dart';
 
 class TvSeriesSearchNotifier extends ChangeNotifier {
   final SearchTvSeries searchTvSeries;

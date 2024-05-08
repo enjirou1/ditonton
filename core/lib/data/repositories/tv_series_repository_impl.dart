@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import '../../utils/exception.dart';
-import '../../utils/failure.dart';
-import '../../utils/network_info.dart';
-import '../datasources/tv_series_local_data_source.dart';
-import '../datasources/tv_series_remote_data_source.dart';
-import '../models/tv_series/tv_series_table.dart';
-import '../../domain/entities/tv_series.dart';
-import '../../domain/entities/tv_series_detail.dart';
-import '../../domain/repositories/tv_series_repository.dart';
+import 'package:core/utils/exception.dart';
+import 'package:core/utils/failure.dart';
+import 'package:core/utils/network_info.dart';
+import 'package:core/data/datasources/tv_series_local_data_source.dart';
+import 'package:core/data/datasources/tv_series_remote_data_source.dart';
+import 'package:core/data/models/tv_series/tv_series_table.dart';
+import 'package:core/domain/entities/tv_series.dart';
+import 'package:core/domain/entities/tv_series_detail.dart';
+import 'package:core/domain/repositories/tv_series_repository.dart';
 
 class TvSeriesRepositoryImpl implements TvSeriesRepository {
   final TvSeriesRemoteDataSource remoteDataSource;

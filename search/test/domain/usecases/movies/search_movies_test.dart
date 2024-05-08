@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search/domain/usecases/movies/search_movies.dart';
-import 'package:core/test/helpers/test_helper.mocks.dart';
+import '../../../../../core/test/helpers/test_helper.mocks.dart';
 
 void main() {
   late SearchMovies usecase;

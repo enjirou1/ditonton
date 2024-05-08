@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import '../../utils/exception.dart';
-import '../models/tv_series/tv_series_detail_model.dart';
-import '../models/tv_series/tv_series_model.dart';
-import '../models/tv_series/tv_series_response.dart';
+import 'package:core/utils/exception.dart';
+import 'package:core/data/models/tv_series/tv_series_detail_model.dart';
+import 'package:core/data/models/tv_series/tv_series_model.dart';
+import 'package:core/data/models/tv_series/tv_series_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class TvSeriesRemoteDataSource {

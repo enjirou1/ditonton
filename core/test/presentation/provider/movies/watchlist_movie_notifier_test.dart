@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import '../../../../lib/utils/failure.dart';
-import '../../../../lib/utils/state_enum.dart';
-import '../../../../lib/domain/usecases/movies/get_watchlist_movies.dart';
-import '../../../../lib/presentation/provider/movies/watchlist_movie_notifier.dart';
+import 'package:core/utils/failure.dart';
+import 'package:core/utils/state_enum.dart';
+import 'package:core/domain/usecases/movies/get_watchlist_movies.dart';
+import 'package:core/presentation/provider/movies/watchlist_movie_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

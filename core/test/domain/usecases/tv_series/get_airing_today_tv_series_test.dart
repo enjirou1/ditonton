@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import '../../../../lib/domain/entities/tv_series.dart';
-import '../../../../lib/domain/usecases/tv_series/get_airing_today_tv_series.dart';
+import 'package:core/domain/entities/tv_series.dart';
+import 'package:core/domain/usecases/tv_series/get_airing_today_tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

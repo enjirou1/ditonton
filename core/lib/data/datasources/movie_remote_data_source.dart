@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import '../models/movies/movie_detail_model.dart';
-import '../models/movies/movie_model.dart';
-import '../models/movies/movie_response.dart';
-import '../../utils/exception.dart';
+import 'package:core/data/models/movies/movie_detail_model.dart';
+import 'package:core/data/models/movies/movie_model.dart';
+import 'package:core/data/models/movies/movie_response.dart';
+import 'package:core/utils/exception.dart';
 import 'package:http/http.dart' as http;
 
 abstract class MovieRemoteDataSource {

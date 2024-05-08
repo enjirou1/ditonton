@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/utils/routes.dart';
-import '../../../styles/text_styles.dart';
-import '../../../utils/constants.dart';
-import '../../../domain/entities/movie.dart';
-import '../../provider/movies/movie_list_notifier.dart';
-import '../../../utils/state_enum.dart';
-import '../../widgets/custom_animated_drawer.dart';
-import '../../widgets/custom_drawer.dart';
+import 'package:core/styles/text_styles.dart';
+import 'package:core/utils/constants.dart';
+import 'package:core/domain/entities/movie.dart';
+import 'package:core/presentation/provider/movies/movie_list_notifier.dart';
+import 'package:core/utils/state_enum.dart';
+import 'package:core/presentation/widgets/custom_animated_drawer.dart';
+import 'package:core/presentation/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

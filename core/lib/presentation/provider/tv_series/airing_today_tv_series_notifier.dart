@@ -1,6 +1,6 @@
-import '../../../utils/state_enum.dart';
-import '../../../domain/entities/tv_series.dart';
-import '../../../domain/usecases/tv_series/get_airing_today_tv_series.dart';
+import 'package:core/utils/state_enum.dart';
+import 'package:core/domain/entities/tv_series.dart';
+import 'package:core/domain/usecases/tv_series/get_airing_today_tv_series.dart';
 import 'package:flutter/foundation.dart';
 
 class AiringTodayTvSeriesNotifier extends ChangeNotifier {

@@ -2,13 +2,13 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/utils/routes.dart';
-import '../../../domain/entities/genre.dart';
-import '../../../domain/entities/movie.dart';
-import '../../../domain/entities/movie_detail.dart';
-import '../../../styles/colors.dart';
-import '../../../styles/text_styles.dart';
-import '../../provider/movies/movie_detail_notifier.dart';
-import '../../../utils/state_enum.dart';
+import 'package:core/domain/entities/genre.dart';
+import 'package:core/domain/entities/movie.dart';
+import 'package:core/domain/entities/movie_detail.dart';
+import 'package:core/styles/colors.dart';
+import 'package:core/styles/text_styles.dart';
+import 'package:core/presentation/provider/movies/movie_detail_notifier.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';

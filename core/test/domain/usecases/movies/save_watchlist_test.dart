@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import '../../../../lib/domain/usecases/movies/save_watchlist.dart';
+import 'package:core/domain/usecases/movies/save_watchlist.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

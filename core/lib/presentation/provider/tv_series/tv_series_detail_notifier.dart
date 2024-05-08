@@ -1,11 +1,11 @@
-import '../../../domain/entities/tv_series.dart';
-import '../../../domain/entities/tv_series_detail.dart';
-import '../../../utils/state_enum.dart';
-import '../../../domain/usecases/tv_series/get_tv_series_detail.dart';
-import '../../../domain/usecases/tv_series/get_tv_series_recommendations.dart';
-import '../../../domain/usecases/tv_series/get_watchlist_status.dart';
-import '../../../domain/usecases/tv_series/remove_watchlist.dart';
-import '../../../domain/usecases/tv_series/save_watchlist.dart';
+import 'package:core/domain/entities/tv_series.dart';
+import 'package:core/domain/entities/tv_series_detail.dart';
+import 'package:core/utils/state_enum.dart';
+import 'package:core/domain/usecases/tv_series/get_tv_series_detail.dart';
+import 'package:core/domain/usecases/tv_series/get_tv_series_recommendations.dart';
+import 'package:core/domain/usecases/tv_series/get_watchlist_status.dart';
+import 'package:core/domain/usecases/tv_series/remove_watchlist.dart';
+import 'package:core/domain/usecases/tv_series/save_watchlist.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

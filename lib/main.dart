@@ -34,6 +34,7 @@ import 'package:search/presentation/pages/movies/search_page.dart';
 import 'package:search/presentation/pages/tv_series/search_page.dart';
 import 'package:search/presentation/provider/movies/movie_search_notifier.dart';
 import 'package:search/presentation/provider/tv_series/tv_series_search_notifier.dart';
+import 'package:core/utils/routes.dart';
 
 void main() {
   di.init();
@@ -108,44 +109,44 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             // movies
-            case HomeMoviePage.ROUTE_NAME:
+            case HOME_MOVIES_ROUTE:
               return MaterialPageRoute(builder: (_) => const HomeMoviePage());
-            case PopularMoviesPage.ROUTE_NAME:
+            case POPULAR_MOVIES_ROUTE:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
-            case TopRatedMoviesPage.ROUTE_NAME:
+            case TOP_RATED_MOVIES_ROUTE:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case MovieDetailPage.ROUTE_NAME:
+            case MOVIE_DETAIL_ROUTE:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case SearchPage.ROUTE_NAME:
+            case SEARCH_MOVIE_ROUTE:
               return CupertinoPageRoute(builder: (_) => SearchPage());
-            case WatchlistMoviesPage.ROUTE_NAME:
+            case WATCHLIST_MOVIES_ROUTE:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
-            case NowPlayingMoviesPage.ROUTE_NAME:
+            case NOW_PLAYING_ROUTE:
               return MaterialPageRoute(builder: (_) => NowPlayingMoviesPage());
             // tv series
-            case HomeTvSeriesPage.ROUTE_NAME:
+            case HOME_TV_SERIES_ROUTE:
               return MaterialPageRoute(builder: (_) => const HomeTvSeriesPage());
-            case PopularTvSeriesPage.ROUTE_NAME:
+            case POPULAR_TV_SERIES_ROUTE:
               return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
-            case TopRatedTvSeriesPage.ROUTE_NAME:
+            case TOP_RATED_TV_SERIES_ROUTE:
               return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
-            case TvSeriesDetailPage.ROUTE_NAME:
+            case TV_SERIES_DETAIL_ROUTE:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvSeriesDetailPage(id: id),
                 settings: settings,
               );
-            case SearchTvSeriesPage.ROUTE_NAME:
+            case SEARCH_TV_SERIES_ROUTE:
               return CupertinoPageRoute(builder: (_) => SearchTvSeriesPage());
-            case WatchlistTvSeriesPage.ROUTE_NAME:
+            case WATCHLIST_TV_SERIES_ROUTE:
               return MaterialPageRoute(builder: (_) => WatchlistTvSeriesPage());
-            case AiringTodayTvSeriesPage.ROUTE_NAME:
+            case AIRING_TODAY_ROUTE:
               return MaterialPageRoute(builder: (_) => AiringTodayTvSeriesPage());
-            case AboutPage.ROUTE_NAME:
+            case ABOUT_ROUTE:
               return MaterialPageRoute(builder: (_) => const AboutPage());
             default:
               return MaterialPageRoute(builder: (_) {

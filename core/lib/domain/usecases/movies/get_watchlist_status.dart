@@ -1,4 +1,4 @@
-import '../../repositories/movie_repository.dart';
+import 'package:core/domain/repositories/movie_repository.dart';
 
 class GetWatchListStatus {
   final MovieRepository repository;

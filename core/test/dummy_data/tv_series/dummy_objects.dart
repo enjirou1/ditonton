@@ -1,7 +1,7 @@
-import '../../../lib/data/models/tv_series/tv_series_table.dart';
-import '../../../lib/domain/entities/genre.dart';
-import '../../../lib/domain/entities/tv_series.dart';
-import '../../../lib/domain/entities/tv_series_detail.dart';
+import 'package:core/data/models/tv_series/tv_series_table.dart';
+import 'package:core/domain/entities/genre.dart';
+import 'package:core/domain/entities/tv_series.dart';
+import 'package:core/domain/entities/tv_series_detail.dart';
 
 final testTvSeries = TvSeries(
   firstAirDate: '2023-01-23',
