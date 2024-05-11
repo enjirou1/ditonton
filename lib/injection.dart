@@ -41,6 +41,7 @@ import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifie
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:search/bloc/movies/search_bloc.dart';
 import 'package:search/domain/usecases/movies/search_movies.dart';
 import 'package:search/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:search/presentation/provider/movies/movie_search_notifier.dart';
@@ -90,6 +91,11 @@ void init() {
   locator.registerFactory(
     () => NowPlayingMoviesNotifier(
       getNowPlayingMovies: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => SearchBloc(
+      locator(),
     ),
   );
   // tv series

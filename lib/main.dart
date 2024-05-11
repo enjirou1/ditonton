@@ -28,8 +28,10 @@ import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dar
 import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:search/bloc/movies/search_bloc.dart';
 import 'package:search/presentation/pages/movies/search_page.dart';
 import 'package:search/presentation/pages/tv_series/search_page.dart';
 import 'package:search/presentation/provider/movies/movie_search_notifier.dart';
@@ -94,6 +96,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<AiringTodayTvSeriesNotifier>(),
         ),
+        BlocProvider(
+          create: (_) => di.locator<SearchBloc>()
+        )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
