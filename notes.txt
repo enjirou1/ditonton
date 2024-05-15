@@ -4,3 +4,6 @@ flutter test --coverage
 flutter pub global activate test_cov_console
 
 flutter create --template=package <package_name>
+
+SQLCipher untuk enkripsi database
+Package encrypt, untuk enkripsi data
