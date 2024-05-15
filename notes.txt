@@ -1,5 +1,4 @@
 flutter pub run build_runner build
-
 flutter test --coverage
 flutter pub global activate test_cov_console
 
@@ -7,3 +6,5 @@ flutter create --template=package <package_name>
 
 SQLCipher untuk enkripsi database
 Package encrypt, untuk enkripsi data
+Obfuscation, untuk menyamarkan kode biner dari aplikasi agar menyulitkan ketika dilakukan reverse engineering.
+flutter build apk --obfuscate --split-debug-info=<directory>
