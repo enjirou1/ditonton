@@ -26,6 +26,8 @@ import 'package:core/presentation/provider/tv_series/top_rated_tv_series_notifie
 import 'package:core/presentation/provider/tv_series/tv_series_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dart';
 import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
+import 'package:ditonton/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +40,11 @@ import 'package:search/presentation/provider/movies/movie_search_notifier.dart';
 import 'package:search/presentation/provider/tv_series/tv_series_search_notifier.dart';
 import 'package:core/utils/routes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
   di.init();
   runApp(const MyApp());
 }
