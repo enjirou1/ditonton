@@ -1,6 +1,7 @@
 flutter pub run build_runner build
 flutter test --coverage
 flutter pub global activate test_cov_console
+flutter test modul1 modul2
 
 flutter create --template=package <package_name>
 
