@@ -1,7 +1,7 @@
 flutter pub run build_runner build
 flutter test --coverage
 flutter pub global activate test_cov_console
-flutter test modul1 modul2
+flutter test modul1 modul2, jika ada error perlu menambahkan dependecy untuk testing di tiap modul dan sesuaikan json_reader.dart
 
 flutter create --template=package <package_name>
 

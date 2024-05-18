@@ -1,6 +1,7 @@
 import 'package:about/about_page.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
+import 'package:core/utils/http_ssl_pinning.dart';
 import 'package:core/utils/utils.dart';
 import 'package:core/presentation/pages/movies/movie_detail_page.dart';
 import 'package:core/presentation/pages/movies/home_movie_page.dart';
@@ -45,6 +46,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
+  await HttpSSLPinning.init();
   di.init();
   runApp(const MyApp());
 }
