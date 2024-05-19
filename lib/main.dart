@@ -1,4 +1,5 @@
 import 'package:about/about_page.dart';
+import 'package:core/presentation/bloc/movies/movies_bloc.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/http_ssl_pinning.dart';
@@ -15,12 +16,6 @@ import 'package:core/presentation/pages/tv_series/popular_tv_series_page.dart';
 import 'package:core/presentation/pages/tv_series/top_rated_tv_series_page.dart';
 import 'package:core/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:core/presentation/pages/tv_series/watchlist_series_page.dart';
-import 'package:core/presentation/provider/movies/movie_detail_notifier.dart';
-import 'package:core/presentation/provider/movies/movie_list_notifier.dart';
-import 'package:core/presentation/provider/movies/now_playing_movies_notifier.dart';
-import 'package:core/presentation/provider/movies/popular_movies_notifier.dart';
-import 'package:core/presentation/provider/movies/top_rated_movies_notifier.dart';
-import 'package:core/presentation/provider/movies/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/tv_series/airing_today_tv_series_notifier.dart';
 import 'package:core/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:core/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
@@ -35,9 +30,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:search/bloc/movies/search_bloc.dart';
+import 'package:search/bloc/tv_series/search_bloc.dart';
 import 'package:search/presentation/pages/movies/search_page.dart';
 import 'package:search/presentation/pages/tv_series/search_page.dart';
-import 'package:search/presentation/provider/movies/movie_search_notifier.dart';
 import 'package:search/presentation/provider/tv_series/tv_series_search_notifier.dart';
 import 'package:core/utils/routes.dart';
 
@@ -61,7 +56,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // movies
-        ChangeNotifierProvider(
+        /* ChangeNotifierProvider(
           create: (_) => di.locator<MovieListNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -81,6 +76,27 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<NowPlayingMoviesNotifier>(),
+        ), */
+        BlocProvider(
+          create: (_) => di.locator<HomeMoviesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<DetailMoviesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMoviesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularMoviesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMoviesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingMoviesBloc>()
         ),
         // tv series
         ChangeNotifierProvider(
@@ -105,7 +121,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<AiringTodayTvSeriesNotifier>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<SearchBloc>()
+          create: (_) => di.locator<SearchTvSeriesBloc>()
         )
       ],
       child: MaterialApp(

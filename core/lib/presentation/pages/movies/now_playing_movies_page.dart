@@ -1,8 +1,7 @@
-import 'package:core/utils/state_enum.dart';
-import 'package:core/presentation/provider/movies/now_playing_movies_notifier.dart';
+import 'package:core/presentation/bloc/movies/movies_bloc.dart';
 import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NowPlayingMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/now-playing-movie';
@@ -16,7 +15,8 @@ class _NowPlayingMoviesPageState extends State<NowPlayingMoviesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-      Provider.of<NowPlayingMoviesNotifier>(context, listen: false).fetchNowPlayingMovies()
+      // Provider.of<NowPlayingMoviesNotifier>(context, listen: false).fetchNowPlayingMovies()
+      context.read<NowPlayingMoviesBloc>().add(GetNowPlayingMoviesEvent())
     );
   }
 
@@ -28,7 +28,7 @@ class _NowPlayingMoviesPageState extends State<NowPlayingMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<NowPlayingMoviesNotifier>(
+        /* child: Consumer<NowPlayingMoviesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return const Center(
@@ -49,7 +49,29 @@ class _NowPlayingMoviesPageState extends State<NowPlayingMoviesPage> {
               );
             }
           },
-        ),
+        ), */
+        child: BlocBuilder<NowPlayingMoviesBloc, MoviesState>(
+          builder: (context, state) {
+            if (state is MoviesError) {
+              return Center(
+                key: const Key('error_message'),
+                child: Text(state.message),
+              );
+            } else if (state is MoviesHasData) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final movie = state.result[index];
+                  return MovieCard(movie);
+                },
+                itemCount: state.result.length,
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              ); 
+            }
+          },
+        )
       ),
     );
   }

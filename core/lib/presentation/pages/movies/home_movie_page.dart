@@ -1,14 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/presentation/bloc/movies/movies_bloc.dart';
 import 'package:core/utils/routes.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/domain/entities/movie.dart';
-import 'package:core/presentation/provider/movies/movie_list_notifier.dart';
-import 'package:core/utils/state_enum.dart';
 import 'package:core/presentation/widgets/custom_animated_drawer.dart';
 import 'package:core/presentation/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeMoviePage extends StatefulWidget {
   static const ROUTE_NAME = '/home-movies';
@@ -24,10 +23,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   void initState() {
     super.initState();
     Future.microtask(() => 
-      Provider.of<MovieListNotifier>(context, listen: false)
+      /* Provider.of<MovieListNotifier>(context, listen: false)
         ..fetchNowPlayingMovies()
         ..fetchPopularMovies()
-        ..fetchTopRatedMovies()
+        ..fetchTopRatedMovies() */
+      context.read<HomeMoviesBloc>()
+        ..add(GetNowPlayingMoviesEvent())
+        ..add(GetPopularMoviesEvent())
+        ..add(GetTopRatedMoviesEvent())
     );
   }
 
@@ -59,7 +62,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     title: 'Now Playing',
                     onTap: () => Navigator.pushNamed(context, NOW_PLAYING_ROUTE),
                   ),
-                  Consumer<MovieListNotifier>(builder: (context, data, child) {
+                  /* Consumer<MovieListNotifier>(builder: (context, data, child) {
                     final state = data.nowPlayingState;
                     if (state == RequestState.Loading) {
                       return const Center(
@@ -70,12 +73,27 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     } else {
                       return const Text('Failed');
                     }
-                  }),
+                  }), */
+                  BlocBuilder<HomeMoviesBloc, MoviesState>(
+                    builder: (context, state) {
+                      if (state is MoviesHomeHasData) {
+                        if (state.isLoadingNowPlayingMovies) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return MovieList(state.nowPlayingMovies);
+                        }
+                      } else if (state is MoviesEmpty) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        return const Text('Failed');
+                      }
+                    }
+                  ),
                   _buildSubHeading(
                     title: 'Popular',
                     onTap: () => Navigator.pushNamed(context, POPULAR_MOVIES_ROUTE),
                   ),
-                  Consumer<MovieListNotifier>(builder: (context, data, child) {
+                  /* Consumer<MovieListNotifier>(builder: (context, data, child) {
                     final state = data.popularMoviesState;
                     if (state == RequestState.Loading) {
                       return const Center(
@@ -86,12 +104,27 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     } else {
                       return const Text('Failed');
                     }
-                  }),
+                  }), */
+                  BlocBuilder<HomeMoviesBloc, MoviesState>(
+                    builder: (context, state) {
+                      if (state is MoviesHomeHasData) {
+                        if (state.isLoadingPopularMovies) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return MovieList(state.popularMovies);
+                        }
+                      } else if (state is MoviesEmpty) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        return const Text('Failed');
+                      }
+                    }
+                  ),
                   _buildSubHeading(
                     title: 'Top Rated',
                     onTap: () => Navigator.pushNamed(context, TOP_RATED_MOVIES_ROUTE),
                   ),
-                  Consumer<MovieListNotifier>(builder: (context, data, child) {
+                  /* Consumer<MovieListNotifier>(builder: (context, data, child) {
                     final state = data.topRatedMoviesState;
                     if (state == RequestState.Loading) {
                       return const Center(
@@ -102,7 +135,22 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     } else {
                       return const Text('Failed');
                     }
-                  }),
+                  }), */
+                  BlocBuilder<HomeMoviesBloc, MoviesState>(
+                    builder: (context, state) {
+                      if (state is MoviesHomeHasData) {
+                        if (state.isLoadingTopRatedMovies) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return MovieList(state.topRatedMovies);
+                        }
+                      } else if (state is MoviesEmpty) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        return const Text('Failed');
+                      }
+                    }
+                  ),
                 ],
               ),
             ),
