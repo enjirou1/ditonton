@@ -1,8 +1,7 @@
-import 'package:core/utils/state_enum.dart';
-import 'package:core/presentation/provider/tv_series/airing_today_tv_series_notifier.dart';
-import 'package:core/presentation/widgets/tv_series_card.dart';
+import 'package:core/presentation/bloc/tv_series/tv_series_bloc.dart';
+import 'package:core/presentation/pages/tv_series/home_tv_series_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AiringTodayTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/airing-today-tv-series';
@@ -16,7 +15,8 @@ class _AiringTodayTvSeriesPageState extends State<AiringTodayTvSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-      Provider.of<AiringTodayTvSeriesNotifier>(context, listen: false).fetchAiringTodayTvSeries()
+      // Provider.of<AiringTodayTvSeriesNotifier>(context, listen: false).fetchAiringTodayTvSeries()
+      context.read<AiringTodayTvSeriesBloc>().add(GetAiringTodayTvSeriesEvent())
     );
   }
 
@@ -28,7 +28,7 @@ class _AiringTodayTvSeriesPageState extends State<AiringTodayTvSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<AiringTodayTvSeriesNotifier>(
+        /* child: Consumer<AiringTodayTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return const Center(
@@ -49,6 +49,21 @@ class _AiringTodayTvSeriesPageState extends State<AiringTodayTvSeriesPage> {
               );
             }
           },
+        ), */
+        child: BlocBuilder<AiringTodayTvSeriesBloc, TvSeriesState>(
+          builder: (context, state) {
+            if (state is TvSeriesHomeHasData) {
+              if (state.isLoadingAiringTodayTvSeries) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return TvSeriesList(state.airingTodayTvSeries);
+              }
+            } else if (state is TvSeriesEmpty) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return const Text('Failed');
+            }
+          }
         ),
       ),
     );

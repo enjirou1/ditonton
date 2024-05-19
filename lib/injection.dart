@@ -1,4 +1,5 @@
 import 'package:core/presentation/bloc/movies/movies_bloc.dart';
+import 'package:core/presentation/bloc/tv_series/tv_series_bloc.dart';
 import 'package:core/utils/http_ssl_pinning.dart';
 import 'package:core/utils/network_info.dart';
 import 'package:core/data/datasources/db/database_helper.dart';
@@ -28,19 +29,12 @@ import 'package:core/domain/usecases/tv_series/get_watchlist_status.dart';
 import 'package:core/domain/usecases/tv_series/get_watchlist_tv_series.dart';
 import 'package:core/domain/usecases/tv_series/remove_watchlist.dart';
 import 'package:core/domain/usecases/tv_series/save_watchlist.dart';
-import 'package:core/presentation/provider/tv_series/airing_today_tv_series_notifier.dart';
-import 'package:core/presentation/provider/tv_series/popular_tv_series_notifier.dart';
-import 'package:core/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
-import 'package:core/presentation/provider/tv_series/tv_series_detail_notifier.dart';
-import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dart';
-import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:search/bloc/movies/search_bloc.dart';
 import 'package:search/bloc/tv_series/search_bloc.dart';
 import 'package:search/domain/usecases/movies/search_movies.dart';
 import 'package:search/domain/usecases/tv_series/search_tv_series.dart';
-import 'package:search/presentation/provider/tv_series/tv_series_search_notifier.dart';
 
 final locator = GetIt.instance;
 
@@ -130,7 +124,7 @@ void init() {
     ),
   );
   // tv series
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => TvSeriesListNotifier(
       getAiringTodayTvSeries: locator(),
       getPopularTvSeries: locator(),
@@ -175,6 +169,47 @@ void init() {
     () => SearchTvSeriesBloc(
       locator(),
     )
+  ); */
+  locator.registerFactory(
+    () => HomeTvSeriesBloc(
+      getAiringTodayTvSeries: locator(),
+      getPopularTvSeries: locator(),
+      getTopRatedTvSeries: locator()
+    ),
+  );
+  locator.registerFactory(
+    () => DetailTvSeriesBloc(
+      getTvSeriesDetail: locator(),
+      getTvSeriesRecommendations: locator(),
+      getWatchListStatus: locator(),
+      removeWatchlist: locator(),
+      saveWatchlist: locator()
+    ),
+  );
+  locator.registerFactory(
+    () => SearchTvSeriesBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => PopularTvSeriesBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TopRatedTvSeriesBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => WatchlistTvSeriesBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => AiringTodayTvSeriesBloc(
+      locator(),
+    ),
   );
 
   // use case

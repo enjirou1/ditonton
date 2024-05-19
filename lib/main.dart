@@ -1,5 +1,6 @@
 import 'package:about/about_page.dart';
 import 'package:core/presentation/bloc/movies/movies_bloc.dart';
+import 'package:core/presentation/bloc/tv_series/tv_series_bloc.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/http_ssl_pinning.dart';
@@ -16,12 +17,6 @@ import 'package:core/presentation/pages/tv_series/popular_tv_series_page.dart';
 import 'package:core/presentation/pages/tv_series/top_rated_tv_series_page.dart';
 import 'package:core/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:core/presentation/pages/tv_series/watchlist_series_page.dart';
-import 'package:core/presentation/provider/tv_series/airing_today_tv_series_notifier.dart';
-import 'package:core/presentation/provider/tv_series/popular_tv_series_notifier.dart';
-import 'package:core/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
-import 'package:core/presentation/provider/tv_series/tv_series_detail_notifier.dart';
-import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dart';
-import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
 import 'package:ditonton/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,7 +28,6 @@ import 'package:search/bloc/movies/search_bloc.dart';
 import 'package:search/bloc/tv_series/search_bloc.dart';
 import 'package:search/presentation/pages/movies/search_page.dart';
 import 'package:search/presentation/pages/tv_series/search_page.dart';
-import 'package:search/presentation/provider/tv_series/tv_series_search_notifier.dart';
 import 'package:core/utils/routes.dart';
 
 void main() async {
@@ -99,7 +93,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<NowPlayingMoviesBloc>()
         ),
         // tv series
-        ChangeNotifierProvider(
+        /* ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesListNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -119,10 +113,28 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<AiringTodayTvSeriesNotifier>(),
+        ), */
+        BlocProvider(
+          create: (_) => di.locator<HomeTvSeriesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<DetailTvSeriesBloc>()
         ),
         BlocProvider(
           create: (_) => di.locator<SearchTvSeriesBloc>()
-        )
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedTvSeriesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularTvSeriesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvSeriesBloc>()
+        ),
+        BlocProvider(
+          create: (_) => di.locator<AiringTodayTvSeriesBloc>()
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

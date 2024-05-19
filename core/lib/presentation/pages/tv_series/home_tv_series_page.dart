@@ -1,14 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/presentation/bloc/tv_series/tv_series_bloc.dart';
 import 'package:core/utils/routes.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/domain/entities/tv_series.dart';
-import 'package:core/utils/state_enum.dart';
-import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dart';
 import 'package:core/presentation/widgets/custom_animated_drawer.dart';
 import 'package:core/presentation/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/home-tv-series';
@@ -24,10 +23,14 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(() => 
-      Provider.of<TvSeriesListNotifier>(context, listen: false)
+      /* Provider.of<TvSeriesListNotifier>(context, listen: false)
         ..fetchAiringTodayTvSeries()
         ..fetchPopularTvSeries()
-        ..fetchTopRatedTvSeries()
+        ..fetchTopRatedTvSeries() */
+      context.read<HomeTvSeriesBloc>()
+        ..add(GetAiringTodayTvSeriesEvent())
+        ..add(GetPopularTvSeriesEvent())
+        ..add(GetTopRatedTvSeriesEvent())
     );
   }
 
@@ -58,7 +61,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     title: 'Airing Today',
                     onTap: () => Navigator.pushNamed(context, AIRING_TODAY_ROUTE),
                   ),
-                  Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+                  /* Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                     final state = data.airingTodayState;
                     if (state == RequestState.Loading) {
                       return const Center(
@@ -69,12 +72,27 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     } else {
                       return const Text('Failed');
                     }
-                  }),
+                  }), */
+                  BlocBuilder<HomeTvSeriesBloc, TvSeriesState>(
+                    builder: (context, state) {
+                      if (state is TvSeriesHomeHasData) {
+                        if (state.isLoadingAiringTodayTvSeries) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return TvSeriesList(state.airingTodayTvSeries);
+                        }
+                      } else if (state is TvSeriesEmpty) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        return const Text('Failed');
+                      }
+                    }
+                  ),
                   _buildSubHeading(
                     title: 'Popular',
                     onTap: () => Navigator.pushNamed(context, POPULAR_TV_SERIES_ROUTE),
                   ),
-                  Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+                  /* Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                     final state = data.popularTvSeriesState;
                     if (state == RequestState.Loading) {
                       return const Center(
@@ -85,12 +103,27 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     } else {
                       return const Text('Failed');
                     }
-                  }),
+                  }), */
+                  BlocBuilder<HomeTvSeriesBloc, TvSeriesState>(
+                    builder: (context, state) {
+                      if (state is TvSeriesHomeHasData) {
+                        if (state.isLoadingPopularTvSeries) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return TvSeriesList(state.popularTvSeries);
+                        }
+                      } else if (state is TvSeriesEmpty) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        return const Text('Failed');
+                      }
+                    }
+                  ),
                   _buildSubHeading(
                     title: 'Top Rated',
                     onTap: () => Navigator.pushNamed(context, TOP_RATED_TV_SERIES_ROUTE),
                   ),
-                  Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+                  /* Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                     final state = data.topRatedTvSeriesState;
                     if (state == RequestState.Loading) {
                       return const Center(
@@ -101,7 +134,22 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     } else {
                       return const Text('Failed');
                     }
-                  }),
+                  }), */
+                  BlocBuilder<HomeTvSeriesBloc, TvSeriesState>(
+                    builder: (context, state) {
+                      if (state is TvSeriesHomeHasData) {
+                        if (state.isLoadingTopRatedTvSeries) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return TvSeriesList(state.topRatedTvSeries);
+                        }
+                      } else if (state is TvSeriesEmpty) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        return const Text('Failed');
+                      }
+                    }
+                  ),
                 ],
               ),
             ),

@@ -164,8 +164,6 @@ class DetailContent extends StatelessWidget {
                                     }
                                   );
                                 }
-
-                                
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,

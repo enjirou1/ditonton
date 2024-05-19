@@ -1,8 +1,7 @@
-import 'package:core/utils/state_enum.dart';
-import 'package:core/presentation/provider/tv_series/popular_tv_series_notifier.dart';
+import 'package:core/presentation/bloc/tv_series/tv_series_bloc.dart';
 import 'package:core/presentation/widgets/tv_series_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopularTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-tv-series';
@@ -16,7 +15,8 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-      Provider.of<PopularTvSeriesNotifier>(context, listen: false).fetchPopularTvSeries()
+      // Provider.of<PopularTvSeriesNotifier>(context, listen: false).fetchPopularTvSeries()
+      context.read<PopularTvSeriesBloc>().add(GetPopularTvSeriesEvent())
     );
   }
 
@@ -28,7 +28,7 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvSeriesNotifier>(
+        /* child: Consumer<PopularTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return const Center(
@@ -46,6 +46,28 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
               return Center(
                 key: const Key('error_message'),
                 child: Text(data.message),
+              );
+            }
+          },
+        ), */
+        child: BlocBuilder<PopularTvSeriesBloc, TvSeriesState>(
+          builder: (context, state) {
+            if (state is TvSeriesError) {
+              return Center(
+                key: const Key('error_message'),
+                child: Text(state.message),
+              ); 
+            } else if (state is TvSeriesHasData) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final tvSeries = state.result[index];
+                  return TvSeriesCard(tvSeries);
+                },
+                itemCount: state.result.length,
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             }
           },
