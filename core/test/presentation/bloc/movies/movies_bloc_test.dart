@@ -225,6 +225,7 @@ void main() {
       ..add(const LoadWatchlistStatusEvent(tId)),
     expect: () => <MoviesState>[
       const MoviesDetailHasData(isAddedToWatchlist: false, message: "Success"),
+      const MoviesDetailHasData(isAddedToWatchlist: true, message: "Success"),
     ],
     verify: (bloc) {
       verify(mockSaveWatchlist.execute(testMovieDetail));

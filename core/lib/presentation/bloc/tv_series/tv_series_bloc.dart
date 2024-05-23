@@ -206,12 +206,13 @@ class DetailTvSeriesBloc extends Bloc<TvSeriesEvent, TvSeriesState> {
     required this.getWatchListStatus
   }) : super(TvSeriesEmpty()) {
     on<GetTvSeriesDetailEvent>((event, emit) async {
-      if (state is TvSeriesDetailHasData) {
+      /* if (state is TvSeriesDetailHasData) {
         TvSeriesDetailHasData currentState = state as TvSeriesDetailHasData;
         emit(currentState.copyWith(isLoadingTvSeries: true));
       } else {
         emit(const TvSeriesDetailHasData(isLoadingTvSeries: true));
-      }
+      } */
+      emit(const TvSeriesDetailHasData(isLoadingTvSeries: true));
 
       final result = await getTvSeriesDetail.execute(event.id);
 
@@ -228,7 +229,7 @@ class DetailTvSeriesBloc extends Bloc<TvSeriesEvent, TvSeriesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
 
     on<GetTvSeriesRecommendationsEvent>((event, emit) async {
       if (state is TvSeriesDetailHasData) {
@@ -253,7 +254,7 @@ class DetailTvSeriesBloc extends Bloc<TvSeriesEvent, TvSeriesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
     
     on<AddTvSeriesWatchlistEvent>((event, emit) async {
       final result = await saveWatchlist.execute(event.tvSeries);
@@ -271,7 +272,7 @@ class DetailTvSeriesBloc extends Bloc<TvSeriesEvent, TvSeriesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
 
     on<RemoveTvSeriesWatchlistEvent>((event, emit) async {
       final result = await removeWatchlist.execute(event.tvSeries);
@@ -289,7 +290,7 @@ class DetailTvSeriesBloc extends Bloc<TvSeriesEvent, TvSeriesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
 
     on<LoadWatchlistStatusEvent>((event, emit) async {
       final result = await getWatchListStatus.execute(event.id);
@@ -300,6 +301,6 @@ class DetailTvSeriesBloc extends Bloc<TvSeriesEvent, TvSeriesState> {
         emit(TvSeriesDetailHasData(isAddedToWatchlist: result));
       }
       
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
   }
 }

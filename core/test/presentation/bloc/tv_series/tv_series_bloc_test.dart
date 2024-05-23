@@ -225,6 +225,7 @@ void main() {
       ..add(const LoadWatchlistStatusEvent(tId)),
     expect: () => <TvSeriesState>[
       const TvSeriesDetailHasData(isAddedToWatchlist: false, message: "Success"),
+      const TvSeriesDetailHasData(isAddedToWatchlist: true, message: "Success"),
     ],
     verify: (bloc) {
       verify(mockSaveWatchlist.execute(testTvSeriesDetail));

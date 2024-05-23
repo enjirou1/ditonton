@@ -206,12 +206,13 @@ class DetailMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     required this.getWatchListStatus
   }) : super(MoviesEmpty()) {
     on<GetMovieDetailEvent>((event, emit) async {
-      if (state is MoviesDetailHasData) {
+      /* if (state is MoviesDetailHasData) {
         MoviesDetailHasData currentState = state as MoviesDetailHasData;
         emit(currentState.copyWith(isLoadingMovie: true));
       } else {
         emit(const MoviesDetailHasData(isLoadingMovie: true));
-      }
+      } */
+      emit(const MoviesDetailHasData(isLoadingMovie: true));
 
       final result = await getMovieDetail.execute(event.id);
 
@@ -228,7 +229,7 @@ class DetailMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
 
     on<GetMovieRecommendationsEvent>((event, emit) async {
       if (state is MoviesDetailHasData) {
@@ -253,7 +254,7 @@ class DetailMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
     
     on<AddMovieWatchlistEvent>((event, emit) async {
       final result = await saveWatchlist.execute(event.movie);
@@ -271,7 +272,7 @@ class DetailMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
 
     on<RemoveMovieWatchlistEvent>((event, emit) async {
       final result = await removeWatchlist.execute(event.movie);
@@ -289,7 +290,7 @@ class DetailMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
           }
         } 
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
 
     on<LoadWatchlistStatusEvent>((event, emit) async {
       final result = await getWatchListStatus.execute(event.id);
@@ -300,6 +301,6 @@ class DetailMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
         emit(MoviesDetailHasData(isAddedToWatchlist: result));
       }
       
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }/* , transformer: debounce(const Duration(milliseconds: 500)) */);
   }
 }
